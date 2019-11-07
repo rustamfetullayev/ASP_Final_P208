@@ -1,0 +1,69 @@
+﻿@model CarShop.Viewmodels.SingleNewsVM
+
+@{
+    ViewBag.Title = "Single";
+}
+
+
+<div class="header_bottom_right_images">
+    <div class="about_wrapper">
+        <h1>Long-Term Business</h1>
+    </div>
+
+    <div class="about-group">
+        <div class="about-top">
+            <div class="grid images_3_of_1">
+                <img src="~/Source/images/@Model.News.Image" alt="" />
+            </div>
+            <div class="grid span_2_of_3">
+                <h3>@Model.News.Title</h3>
+            </div><div class="clear"></div>
+
+        </div>
+        <p class="about-para">@Model.News.Subtitle</p>
+        <div class="clear"></div>
+        <div class="links">
+            <ul>
+                <li><a href="#"><img src="~/Source/images/blog-icon1.png" title="date"><span>@Model.News.PostDate.Value.ToString("MMMM dd, yyyy")</span></a></li>
+                <li><a href="#"><img src="~/Source/images/blog-icon2.png" title="Admin"><span>admin</span></a></li>
+                <li><a href="#"><img src="~/Source/images/blog-icon3.png" title="Comments"><span>No comments</span></a></li>
+                <li><a href="#"><img src="~/Source/images/blog-icon4.png" title="Lables"><span>View posts</span></a></li>
+                <li><a href="#"><img src="~/Source/images/blog-icon5.png" title="permalink"><span>permalink</span></a></li>
+            </ul>
+        </div>
+        <div class="team">
+            <h2>Related Posts</h2>
+            <div class="section group">
+                @foreach (var item in Model.RelatedNews)
+                {
+                <div class="grid_1_of_3 images_1_of_3">
+                    <img src="~/Source/images/@item.Image" alt="" />
+                    @if (item.Title.Length > 17)
+                    {
+                        <h4><a href="@Url.Action("Single","News",new { id=item.ID})">@item.Title.Substring(0, 17)</a></h4>
+
+                    }
+                    else
+                    {
+                        <h4><a href="@Url.Action("Single","News",new { id=item.ID})">@item.Title</a></h4>
+                    }
+                </div>
+                }
+            </div>
+            <div class="leave-comment">
+                <a href="#" name="comment">Leave a Comment</a>
+            </div>
+            <div class="comments-area">
+                <form>
+                    <p>
+                        <textarea></textarea>
+                    </p>
+                    <p>
+                        <input type="submit" value="Post">
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("_PartialRightSidebar",Model.NewsSide)

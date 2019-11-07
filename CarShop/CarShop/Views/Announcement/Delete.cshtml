@@ -1,0 +1,118 @@
+﻿@model CarShop.Models.CarAnnouncement
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Elanı silmək istədiyinizə əminsinizmi?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Şəkil
+        </dt>
+
+        <dd>
+            <img src="~/Source/images/@Model.Image" style="width:400px;" />
+        </dd>
+
+        <dt>
+            Buraxılış ili
+        </dt>
+
+        <dd>
+            @Model.CarProductionDate.Value.ToString("MMMM dd, yyyy")
+        </dd>
+
+        <dt>
+            Muhərrikin həcmi
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarMotor)
+        </dd>
+
+        <dt>
+            Haqqında
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.About)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ride)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ride)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fuel.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fuel.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gearbox.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gearbox.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a href="@Url.Action("Personal","Account",new { id=Model.UserID})" class="btn btn-primary">Back to list</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CarShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="60" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="CarAnnouncement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="255" />
+          <Property Name="CarProductionDate" Type="datetime" />
+          <Property Name="CarMotor" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="About" Type="nvarchar" MaxLength="300" />
+          <Property Name="PostDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="CarModelID" Type="int" />
+          <Property Name="CarGearID" Type="int" />
+          <Property Name="CarFuelID" Type="int" />
+          <Property Name="CityID" Type="int" />
+          <Property Name="IsVIP" Type="bit" />
+          <Property Name="ColorID" Type="int" />
+          <Property Name="Ride" Type="int" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="CarID" Type="int" />
+          <Property Name="ComDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Fuel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Gearbox">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Mark">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="MarkID" Type="int" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="255" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="Subtitle" Type="nvarchar" MaxLength="300" />
+          <Property Name="PostDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="60" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__CarAnnoun__CarFu__300424B4">
+          <End Role="Fuel" Type="Self.Fuel" Multiplicity="0..1" />
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fuel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="CarFuelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarAnnoun__CarGe__2F10007B">
+          <End Role="Gearbox" Type="Self.Gearbox" Multiplicity="0..1" />
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gearbox">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="CarGearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarAnnoun__CarMo__2D27B809">
+          <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="CarModelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarAnnoun__CityI__30F848ED">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarAnnoun__Color__35BCFE0A">
+          <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarAnnoun__UserI__5AEE82B9">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__CarID__03F0984C">
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarAnnouncement">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="CarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__UserID__02FC7413">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Model__MarkID__36B12243">
+          <End Role="Mark" Type="Self.Mark" Multiplicity="0..1" />
+          <End Role="Model" Type="Self.Model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mark">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Model">
+              <PropertyRef Name="MarkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarShopModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarAnnouncement" EntityType="Self.CarAnnouncement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fuel" EntityType="Self.Fuel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gearbox" EntityType="Self.Gearbox" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mark" EntityType="Self.Mark" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CarAnnoun__CarFu__300424B4" Association="Self.FK__CarAnnoun__CarFu__300424B4">
+            <End Role="Fuel" EntitySet="Fuel" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarAnnoun__CarGe__2F10007B" Association="Self.FK__CarAnnoun__CarGe__2F10007B">
+            <End Role="Gearbox" EntitySet="Gearbox" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarAnnoun__CarMo__2D27B809" Association="Self.FK__CarAnnoun__CarMo__2D27B809">
+            <End Role="Model" EntitySet="Model" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarAnnoun__CityI__30F848ED" Association="Self.FK__CarAnnoun__CityI__30F848ED">
+            <End Role="City" EntitySet="City" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarAnnoun__Color__35BCFE0A" Association="Self.FK__CarAnnoun__Color__35BCFE0A">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarAnnoun__UserI__5AEE82B9" Association="Self.FK__CarAnnoun__UserI__5AEE82B9">
+            <End Role="User" EntitySet="User" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__CarID__03F0984C" Association="Self.FK__Comment__CarID__03F0984C">
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncement" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__UserID__02FC7413" Association="Self.FK__Comment__UserID__02FC7413">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Model__MarkID__36B12243" Association="Self.FK__Model__MarkID__36B12243">
+            <End Role="Mark" EntitySet="Mark" />
+            <End Role="Model" EntitySet="Model" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CarAnnouncement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CarProductionDate" Type="DateTime" Precision="3" />
+          <Property Name="CarMotor" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="About" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PostDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="CarModelID" Type="Int32" />
+          <Property Name="CarGearID" Type="Int32" />
+          <Property Name="CarFuelID" Type="Int32" />
+          <Property Name="CityID" Type="Int32" />
+          <Property Name="IsVIP" Type="Boolean" />
+          <Property Name="ColorID" Type="Int32" />
+          <Property Name="Ride" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
+          <NavigationProperty Name="Fuel" Relationship="Self.FK__CarAnnoun__CarFu__300424B4" FromRole="CarAnnouncement" ToRole="Fuel" />
+          <NavigationProperty Name="Gearbox" Relationship="Self.FK__CarAnnoun__CarGe__2F10007B" FromRole="CarAnnouncement" ToRole="Gearbox" />
+          <NavigationProperty Name="Model" Relationship="Self.FK__CarAnnoun__CarMo__2D27B809" FromRole="CarAnnouncement" ToRole="Model" />
+          <NavigationProperty Name="City" Relationship="Self.FK__CarAnnoun__CityI__30F848ED" FromRole="CarAnnouncement" ToRole="City" />
+          <NavigationProperty Name="Color" Relationship="Self.FK__CarAnnoun__Color__35BCFE0A" FromRole="CarAnnouncement" ToRole="Color" />
+          <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="CarShopModel.FK__CarAnnoun__UserI__5AEE82B9" FromRole="CarAnnouncement" ToRole="User" />
+          <NavigationProperty Name="Comments" Relationship="CarShopModel.FK__Comment__CarID__03F0984C" FromRole="CarAnnouncement" ToRole="Comment" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CarAnnouncements" Relationship="Self.FK__CarAnnoun__CityI__30F848ED" FromRole="City" ToRole="CarAnnouncement" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CarAnnouncements" Relationship="Self.FK__CarAnnoun__Color__35BCFE0A" FromRole="Color" ToRole="CarAnnouncement" />
+        </EntityType>
+        <EntityType Name="Fuel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CarAnnouncements" Relationship="Self.FK__CarAnnoun__CarFu__300424B4" FromRole="Fuel" ToRole="CarAnnouncement" />
+        </EntityType>
+        <EntityType Name="Gearbox">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CarAnnouncements" Relationship="Self.FK__CarAnnoun__CarGe__2F10007B" FromRole="Gearbox" ToRole="CarAnnouncement" />
+        </EntityType>
+        <EntityType Name="Mark">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Models" Relationship="Self.FK__Model__MarkID__36B12243" FromRole="Mark" ToRole="Model" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MarkID" Type="Int32" />
+          <NavigationProperty Name="CarAnnouncements" Relationship="Self.FK__CarAnnoun__CarMo__2D27B809" FromRole="Model" ToRole="CarAnnouncement" />
+          <NavigationProperty Name="Mark" Relationship="Self.FK__Model__MarkID__36B12243" FromRole="Model" ToRole="Mark" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Subtitle" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PostDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK__CarAnnoun__CarFu__300424B4">
+          <End Role="Fuel" Type="Self.Fuel" Multiplicity="0..1" />
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fuel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="CarFuelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarAnnoun__CarGe__2F10007B">
+          <End Role="Gearbox" Type="Self.Gearbox" Multiplicity="0..1" />
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gearbox">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="CarGearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarAnnoun__CarMo__2D27B809">
+          <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="CarModelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarAnnoun__CityI__30F848ED">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarAnnoun__Color__35BCFE0A">
+          <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+          <End Role="CarAnnouncement" Type="Self.CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Model__MarkID__36B12243">
+          <End Role="Mark" Type="Self.Mark" Multiplicity="0..1" />
+          <End Role="Model" Type="Self.Model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mark">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Model">
+              <PropertyRef Name="MarkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarShopEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarAnnouncements" EntityType="Self.CarAnnouncement" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Colors" EntityType="Self.Color" />
+          <EntitySet Name="Fuels" EntityType="Self.Fuel" />
+          <EntitySet Name="Gearboxes" EntityType="Self.Gearbox" />
+          <EntitySet Name="Marks" EntityType="Self.Mark" />
+          <EntitySet Name="Models" EntityType="Self.Model" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <AssociationSet Name="FK__CarAnnoun__CarFu__300424B4" Association="Self.FK__CarAnnoun__CarFu__300424B4">
+            <End Role="Fuel" EntitySet="Fuels" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarAnnoun__CarGe__2F10007B" Association="Self.FK__CarAnnoun__CarGe__2F10007B">
+            <End Role="Gearbox" EntitySet="Gearboxes" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarAnnoun__CarMo__2D27B809" Association="Self.FK__CarAnnoun__CarMo__2D27B809">
+            <End Role="Model" EntitySet="Models" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarAnnoun__CityI__30F848ED" Association="Self.FK__CarAnnoun__CityI__30F848ED">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarAnnoun__Color__35BCFE0A" Association="Self.FK__CarAnnoun__Color__35BCFE0A">
+            <End Role="Color" EntitySet="Colors" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Model__MarkID__36B12243" Association="Self.FK__Model__MarkID__36B12243">
+            <End Role="Mark" EntitySet="Marks" />
+            <End Role="Model" EntitySet="Models" />
+          </AssociationSet>
+          <EntitySet Name="Admins" EntityType="CarShopModel.Admin" />
+          <EntitySet Name="Users" EntityType="CarShopModel.User" />
+          <AssociationSet Name="FK__CarAnnoun__UserI__5AEE82B9" Association="CarShopModel.FK__CarAnnoun__UserI__5AEE82B9">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncements" />
+          </AssociationSet>
+          <EntitySet Name="Comments" EntityType="CarShopModel.Comment" />
+          <AssociationSet Name="FK__Comment__CarID__03F0984C" Association="CarShopModel.FK__Comment__CarID__03F0984C">
+            <End Role="CarAnnouncement" EntitySet="CarAnnouncements" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__UserID__02FC7413" Association="CarShopModel.FK__Comment__UserID__02FC7413">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CarAnnouncements" Relationship="CarShopModel.FK__CarAnnoun__UserI__5AEE82B9" FromRole="User" ToRole="CarAnnouncement" />
+          <NavigationProperty Name="Comments" Relationship="CarShopModel.FK__Comment__UserID__02FC7413" FromRole="User" ToRole="Comment" />
+        </EntityType>
+        <Association Name="FK__CarAnnoun__UserI__5AEE82B9">
+          <End Type="CarShopModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="CarShopModel.CarAnnouncement" Role="CarAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarAnnouncement">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="CarID" Type="Int32" />
+          <Property Name="ComDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CarAnnouncement" Relationship="CarShopModel.FK__Comment__CarID__03F0984C" FromRole="Comment" ToRole="CarAnnouncement" />
+          <NavigationProperty Name="User" Relationship="CarShopModel.FK__Comment__UserID__02FC7413" FromRole="Comment" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Comment__CarID__03F0984C">
+          <End Type="CarShopModel.CarAnnouncement" Role="CarAnnouncement" Multiplicity="0..1" />
+          <End Type="CarShopModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarAnnouncement">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="CarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__UserID__02FC7413">
+          <End Type="CarShopModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="CarShopModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarShopModelStoreContainer" CdmEntityContainer="CarShopEntities1">
+          <EntitySetMapping Name="CarAnnouncements">
+            <EntityTypeMapping TypeName="CarShopModel.CarAnnouncement">
+              <MappingFragment StoreEntitySet="CarAnnouncement">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="CarProductionDate" ColumnName="CarProductionDate" />
+                <ScalarProperty Name="CarMotor" ColumnName="CarMotor" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CarModelID" ColumnName="CarModelID" />
+                <ScalarProperty Name="CarGearID" ColumnName="CarGearID" />
+                <ScalarProperty Name="CarFuelID" ColumnName="CarFuelID" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="IsVIP" ColumnName="IsVIP" />
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+                <ScalarProperty Name="Ride" ColumnName="Ride" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="CarShopModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="CarShopModel.Color">
+              <MappingFragment StoreEntitySet="Color">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fuels">
+            <EntityTypeMapping TypeName="CarShopModel.Fuel">
+              <MappingFragment StoreEntitySet="Fuel">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gearboxes">
+            <EntityTypeMapping TypeName="CarShopModel.Gearbox">
+              <MappingFragment StoreEntitySet="Gearbox">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marks">
+            <EntityTypeMapping TypeName="CarShopModel.Mark">
+              <MappingFragment StoreEntitySet="Mark">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Models">
+            <EntityTypeMapping TypeName="CarShopModel.Model">
+              <MappingFragment StoreEntitySet="Model">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MarkID" ColumnName="MarkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="CarShopModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="CarShopModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CarShopModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="CarShopModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="ComDate" ColumnName="ComDate" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

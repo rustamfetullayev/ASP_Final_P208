@@ -1,0 +1,86 @@
+﻿@using System.Web.Helpers
+@using CarShop.Models
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Free Cars-Online Website Template | Home :: w3layouts</title>
+    <link href="~/Source/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href='//fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!--slider-->
+    <script src="~/Source/js/jquery.min.js"></script>
+    <script src="~/Source/js/script.js" type="text/javascript"></script>
+
+</head>
+<body>
+    <div class="header-bg">
+        <div class="wrap">
+            <div class="h-bg">
+                <div class="total">
+                    <div class="header">
+                        <div class="box_header_user_menu">
+                            @if (Session["userlog"] == null)
+                            {
+                                <ul class="user_menu"><li class="act first"><a href="@Url.Action("Register","Account")"><div class="button-t"><span>Create an Account</span></div></a></li><li class="last"><a href="@Url.Action("Index","Account")"><div class="button-t"><span>Log in</span></div></a></li></ul>
+                            }
+                            else
+                            {
+                                <ul class="user_menu"><li class="last"><a href="@Url.Action("Logout","Account")"><div class="button-t"><span>Log out</span></div></a></li></ul>
+                            }
+                        </div>
+                        <div class="header-right">
+                            <ul class="follow_icon">
+                                @if (Session["userLog"] != null)
+                                {
+                                    User currusr = Session["userLog"] as User;
+                                    <li><a href="@Url.Action("Personal","Account",new { id = currusr.ID})" id="userLogged">@currusr.Name[0]</a></li>
+
+                                }
+                            </ul>
+                        </div><div class="clear"></div>
+                        <div class="header-bot">
+                            <div class="logo">
+                                <a href="@Url.Action("Index","Home")"><img src="~/Source/images/logo.png" alt="" /></a>
+                            </div>
+                            <div class="search">
+                                <form method="post" action="/Announcement/Search">
+                                    <input type="text" placeholder="Axtarış..." required name="query">
+                                    <input class="gray-button" type="submit" value="Search" />
+                                </form>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="menu">
+                        <div class="top-nav">
+                            <ul>
+                                <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                                <li><a href="@Url.Action("Index","News")">News</a></li>
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="banner-top">
+                        <div class="header-bottom">
+                            @RenderBody()
+                            <div class="clear"></div>
+                            <div class="footer-bottom">
+                                <div class="copy">
+                                    <p>&copy 2013 Cars Online . All rights Reserved | Design by <a href="http://w3layouts.com">W3Layouts</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+

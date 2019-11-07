@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bd605b41f2a84a609c445d3efe73a3b9" Name="Diagram1">
+        <EntityTypeShape EntityType="CarShopModel.CarAnnouncement" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarShopModel.City" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarShopModel.Color" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarShopModel.Fuel" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarShopModel.Gearbox" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarShopModel.Mark" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarShopModel.Model" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarShopModel.News" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="CarShopModel.FK__CarAnnoun__CarFu__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="CarShopModel.FK__CarAnnoun__CarGe__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="CarShopModel.FK__CarAnnoun__CarMo__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="CarShopModel.FK__CarAnnoun__CityI__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="CarShopModel.FK__CarAnnoun__Color__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="CarShopModel.FK__Model__MarkID__36B12243" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CarShopModel.Admin" Width="1.5" PointX="8.375" PointY="4.75" />
+        <EntityTypeShape EntityType="CarShopModel.User" Width="1.5" PointX="7.375" PointY="0.875" />
+        <AssociationConnector Association="CarShopModel.FK__CarAnnoun__UserI__5AEE82B9" />
+        <EntityTypeShape EntityType="CarShopModel.Comment" Width="1.5" PointX="9.625" PointY="1.625" />
+        <AssociationConnector Association="CarShopModel.FK__Comment__CarID__03F0984C" />
+        <AssociationConnector Association="CarShopModel.FK__Comment__UserID__02FC7413" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

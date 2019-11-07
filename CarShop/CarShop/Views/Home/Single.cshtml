@@ -1,0 +1,150 @@
+﻿@model CarShop.Viewmodels.SingleCarVM
+
+@{
+    ViewBag.Title = "Single";
+}
+
+
+<div class="header_bottom_right_images">
+    <div class="about_wrapper">
+        <h1>Long-Term Business</h1>
+    </div>
+
+    <div class="about-group">
+        <div class="about-top">
+            <div class="grid images_3_of_1">
+                <img src="~/Source/images/@Model.Car.Image" style="width:100%;" />
+            </div>
+            <div class="grid span_2_of_3">
+                <h3>@Model.Car.Title</h3>
+                <p>@Model.Car.Model.Name</p>
+                <p>@Model.Car.Model.Mark.Name</p>
+            </div><div class="clear"></div>
+
+        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                Şəhər
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Car.City.Name)
+            </dd>
+            <dt>
+                Buraxılış ili
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Car.CarProductionDate.Value.Year)
+            </dd>
+            <dt>
+                Mühərrikin həcmi
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Car.CarMotor) l
+            </dd>
+            <dt>
+                Yanacaq növü
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Car.Fuel.Name)
+            </dd>
+            <dt>
+                Yürüş
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Car.Ride) km
+            </dd>
+            <dt>
+                Sürətlər qutusu
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Car.Gearbox.Name)
+            </dd>
+            <dt>
+                Qiymət
+            </dt>
+            <dd>
+                <b style="font-size:2em; color:#d54f30;">@Html.DisplayFor(model => model.Car.Price) AZN</b>
+            </dd>
+        </dl>
+        <p class="about-para">@Model.Car.About</p>
+        <div class="clear"></div>
+        <div class="links">
+            <ul>
+                <li><a href="#"><img src="~/Source/images/blog-icon1.png" title="date"><span>@Model.Car.UpdateDate.Value.ToString("MMMM dd, yyyy")</span></a></li>
+                <li><a href="@Url.Action("Personal","Account",new { id = Model.Car.UserID})"><img src="~/Source/images/blog-icon2.png" title="Admin"><span>@Model.Car.User.Email</span></a></li>
+                <li><a href="#"><img src="~/Source/images/blog-icon3.png" title="Comments"><span>No comments</span></a></li>
+                <li><a href="#"><img src="~/Source/images/blog-icon4.png" title="Lables"><span>View posts</span></a></li>
+                <li><a href="#"><img src="~/Source/images/blog-icon5.png" title="permalink"><span>permalink</span></a></li>
+            </ul>
+        </div>
+        <div class="team">
+            <h2>Related Posts</h2>
+            <div class="section group">
+                @foreach (var item in Model.Announcements)
+                {
+                    <div class="grid_1_of_3 images_1_of_3">
+                        <img src="~/Source/images/@item.Image" style="width:100%;" />
+                        <h4><a href="@Url.Action("Single","Home",new { id=item.ID})">@item.Title</a></h4>
+                    </div>
+                }
+                <div class="clear"></div>
+            </div>
+            @if (Session["userLog"] != null)
+            {
+                <div class="leave-comment">
+                    <a href="" name="comment">Leave a Comment</a>
+                </div>
+                <div class="comments-area">
+                    <form>
+                        <p>
+                            <textarea name="text" id="message" required></textarea>
+                        </p>
+                        <p>
+                            <input id="postcom" class="btn btn-success" value="Post" readonly>
+                            <input type="hidden" value="@Model.Car.ID" name="carid" id="hiddenforid" />
+                        </p>
+                    </form>
+                </div>
+            }
+            <div class="row">
+                <div class="col-md-7" id="comments">
+                    @foreach (var item in Model.Comments)
+                    {
+                        <div class="comment-content" style="border:1px solid gray;padding:20px;margin-bottom:30px;">
+                            <div class="comment-meta d-flex align-items-center justify-content-between">
+                                <p style="font-size:0.9em;"><a href="@Url.Action("Personal","Account",new { id=item.UserID})" class="post-author">@item.User.Name @item.User.Surname</a> on <a href="#" class="post-date">@item.ComDate.ToString()</a></p>
+                            </div>
+                            <p style="font-size:0.9em;">@item.Content</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_PartialRightSidebar", Model.News)
+
+@section scripts
+{
+    <script>
+        var postcom = $("#postcom");
+        var message = $("#message");
+        var hiddenforid = $("#hiddenforid");
+
+        $("#postcom").click(function() {
+            if (message.val() != "") {
+                $.ajax({
+                    url: "/Home/AddComment",
+                    data: { text: message.val(), carid: hiddenforid.val() },
+                    type: "post",
+                    dataType: "html",
+                    success: function (res) {
+                        $("#comments").prepend(res);
+                        $("#message").val('');
+                    }
+                })
+            }
+        });
+    </script>
+}

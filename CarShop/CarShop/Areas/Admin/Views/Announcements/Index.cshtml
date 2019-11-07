@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CarShop.Models.CarAnnouncement>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Şəkil
+        </th>
+        <th>
+            Model
+        </th>
+        <th>
+            Marka
+        </th>
+        <th>
+            Buraxılış ili
+        </th>
+        <th>
+            Mühərrikin həcmi
+        </th>
+        <th>
+            Yürüş
+        </th>
+        <th>
+            Qiymət
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="~/Source/images/@item.Image" style="width:250px;" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model.Mark.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarProductionDate.Value.Year)
+        </td>
+        <td>
+            @item.CarMotor L
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ride) KM
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price) $
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

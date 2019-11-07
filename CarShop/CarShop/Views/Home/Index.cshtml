@@ -1,0 +1,88 @@
+﻿@model CarShop.Viewmodels.Viewmodel
+<div class="header_bottom_right_images">
+    <div id="slideshow">
+        <ul class="slides">
+            <li><a href="#"><canvas></canvas><img src="~/Source/images/banner4.jpg" alt="Marsa Alam underawter close up"></a></li>
+            <li><a href="#"><canvas></canvas><img src="~/Source/images/banner2.jpg" alt="Turrimetta Beach - Dawn"></a></li>
+            <li><a href="#"><canvas></canvas><img src="~/Source/images/banner3.jpg" alt="Power Station"></a></li>
+            <li><a href="#"><canvas></canvas><img src="~/Source/images/banner1.jpg" alt="Colors of Nature"></a></li>
+        </ul>
+        <span class="arrow previous"></span>
+        <span class="arrow next"></span>
+    </div>
+    <div class="content-wrapper">
+        <div class="content-top">
+            <div class="box_wrapper">
+                <h1>All Announcements</h1>
+            </div>
+            <div class="text" id="announcemnts">
+                @Html.Partial("_PartialAnnouncements", Model.Cars)
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <button id="load">See More...</button>
+                    <input id="allcarcount" type="hidden" value="@Model.CarCount" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_PartialRightSidebar",Model.News)
+
+@section scripts
+{
+    <script>
+        //<<<<<<<<<<<<<<<<<<<<<<<<----------------- LOADING ANNOUNCEMENTS WITH SCROLL EVENT ----------------->>>>>>>>>>>>>>>>>>>>>>>>>
+        //var skipCount = 0;
+
+        //var scrollLoadFunction = function () {
+        //    if ($(document).height() - $(window).scrollTop() - $(window).height() < 100) {
+        //        skipCount += 3;
+                
+        //        $.ajax({
+        //            url: "/Announcement/LoadAnnouncement",
+        //            type: "GET",
+        //            data: { skip: skipCount },
+        //            success: function (res) {
+        //                if (res.trim().length != 0) {
+        //                    $("#announcemnts").append(res);
+                            
+        //                }
+        //                else {
+        //                    window.removeEventListener("scroll", scrollLoadFunction);
+        //                }
+        //            }
+        //        })
+        //    }
+        //}
+
+        //window.addEventListener("scroll", scrollLoadFunction);
+
+        //<<<<<<<<<<<<<<<<<<<<<<<<----------------- LOADING ANNOUNCEMENTS WITH CLICK EVENT ----------------->>>>>>>>>>>>>>>>>>>>>>>>>
+        var skipcount = 0;
+        var count = $("#allcarcount").val()-3;
+
+        $("#load").click(function () {
+            skipcount += 3;
+            count -= 3;
+            $.ajax({
+                url: "/announcement/loadannouncement",
+                type: "get",
+                data: { skip: skipcount },
+                success: function (res) {
+                    if (res.trim().length != 0) {
+                        $("#announcemnts").append(res);
+                        console.log(count);
+                        if (count <= 0) {
+                            $("#load").remove();
+                        }
+                    }
+                }
+            })
+        })
+
+    </script>
+}

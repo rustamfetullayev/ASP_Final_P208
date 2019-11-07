@@ -1,0 +1,113 @@
+﻿@model CarShop.Models.CarAnnouncement
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Model.Name</h2>
+
+<div>
+    <h4>@Model.Model.Mark.Name</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Şəkil
+        </dt>
+
+        <dd>
+            <img src="~/Source/images/@Model.Image" style="width:500px;" />
+        </dd>
+
+        <dt>
+            Buraxılış ili
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarProductionDate.Value.Year)
+        </dd>
+
+        <dt>
+            Mühərrikin həcmi
+        </dt>
+
+        <dd>
+            @Model.CarMotor l
+        </dd>
+
+        <dt>
+            Haqqında
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.About)
+        </dd>
+
+        <dt>
+            Yürüş
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ride) KM
+        </dd>
+
+        <dt>
+            Qiymət
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price) $
+        </dd>
+
+        <dt>
+            Elanın başlığı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            Yanacaq növü
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fuel.Name)
+        </dd>
+
+        <dt>
+            Sürətlər qutusu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gearbox.Name)
+        </dd>
+
+        <dt>
+            Şəhər
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City.Name)
+        </dd>
+
+        <dt>
+            Rəng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color.Name)
+        </dd>
+
+        <dt>
+            Elanın sahibi
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

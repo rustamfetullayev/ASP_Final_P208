@@ -1,0 +1,170 @@
+﻿@model CarShop.Models.CarAnnouncement
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Announcement", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>CarAnnouncement</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="Image" class="btn btn-outline-success" />
+            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CarProductionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CarProductionDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+            @Html.ValidationMessageFor(model => model.CarProductionDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CarMotor, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CarMotor, new { htmlAttributes = new { @class = "form-control", type = "number",step="0.1" } })
+            @Html.ValidationMessageFor(model => model.CarMotor, "", new { @class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.About, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.About, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Model.MarkID, "Marka", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("MarkID", (IEnumerable<SelectListItem>)ViewBag.Marks, "Marka seçin...",new { @class = "form-control",id= "markscombo" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label>Model</label>
+            <select id="modelcombo" class="form-control" name="CarModelID">
+                <option value="0">Model seçin</option>
+            </select>
+        </div>
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarGearID, "Sürətlər qutusu", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CarGearID", (IEnumerable<SelectListItem>)ViewBag.Gears, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarFuelID, "Yanacaq növü", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CarFuelID", (IEnumerable<SelectListItem>)ViewBag.Fuels, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CityID, "Şəhər", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CityID", (IEnumerable<SelectListItem>)ViewBag.Cities, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="IsVIP">VIP</label>
+            </div>
+            <div class="col-md-10">
+                @Html.CheckBox("IsVIP", new {@checked = true })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ColorID, "Rəng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ColorID", (IEnumerable<SelectListItem>)ViewBag.Colors, new { @class = "form-control"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ride, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ride, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Ride, "", new { @class = "text-danger",type="number" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-outline-success btn-lg" />
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts    
+{
+    <script>
+        var markscombo = document.getElementById("markscombo");
+        var modelcombo = document.getElementById("modelcombo");
+        var checkbox = document.getElementById("checkbox");
+
+
+
+        markscombo.onchange = function () {
+            modelcombo.innerHTML = "<option value='0'>Model seçin</option>";
+
+            var markid = this.value;
+            if (markid) {
+                var http = new XMLHttpRequest();
+
+                http.onreadystatechange = function () {
+                    if (this.readyState == 4) {
+                        var models = JSON.parse(this.responseText);
+
+                        for (var model of models) {
+                            var option = document.createElement("option");
+                            option.value = model.ID;
+                            option.innerText = model.Name;
+                            modelcombo.appendChild(option);
+                        }
+                    }
+                }
+
+
+                http.open("GET", "/Announcement/LoadModels?markId=" + markid);
+                http.send();
+            }
+            
+        }
+    </script>
+}

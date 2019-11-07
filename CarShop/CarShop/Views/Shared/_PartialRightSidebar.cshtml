@@ -1,0 +1,28 @@
+﻿@using CarShop.Models
+@model IEnumerable<News>
+<div class="header-para">
+    <div class="categories">
+        <div class="box-title">
+            <h1><span class="title-icon"></span><a href="@Url.Action("Index","News")">News</a></h1>
+        </div>
+        <div class="section group example">
+            @foreach (var item in Model)
+            {
+                <div class="grid_1_of_3 images_1_of_3" style="width:100%;">
+                    <div class="grid_1">
+                        <a href="@Url.Action("Single","News",new { id=item.ID})"><img src="~/Source/images/@item.Image" title="continue reading" style="width:100%;" alt=""></a>
+                        <div class="grid_desc">
+                            <p class="title">@item.Title</p>
+                            <p class="title1">@item.Subtitle</p>
+                            <p>@item.PostDate</p>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+            }
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

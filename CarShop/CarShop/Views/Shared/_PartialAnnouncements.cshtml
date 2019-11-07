@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CarShop.Models.CarAnnouncement>
+@foreach (var item in Model)
+{
+    <div class="grid_1_of_3 images_1_of_3">
+        <div class="grid_1">
+            @if (item.IsVIP == true)
+            {
+            <div class="if_vip">
+                <i class="fas fa-gem"></i>
+            </div>
+            }
+            <a href="@Url.Action("Single","Home",new { id=item.ID})"><img src="~/Source/images/@item.Image" title="continue reading" style="width:260px;height:160px;"></a>
+            <div class="grid_desc">
+                @if (item.Title.Length > 15)
+                {
+                    <p class="title">@item.Title.Substring(0, 15)</p>
+                }
+                else
+                {
+                    <p class="title">@item.Title</p>
+                }
+                <p class="title1">@item.Model.Name</p>
+                <p class="title">@item.Model.Mark.Name</p>
+                <p>@item.CarProductionDate.Value.Year il</p>
+                <p>@item.CarMotor l</p>
+                <p>@item.Fuel.Name</p>
+                <p>@item.Ride km</p>
+                <p>@item.Gearbox.Name</p>
+                <p>@item.UpdateDate.Value.ToString("MMMM dd, yyyy")</p>
+                <div class="price" style="height: 50px;">
+                    <span class="reducedfrom">@item.Price $</span>
+                </div>
+                <div class="cart-button">
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

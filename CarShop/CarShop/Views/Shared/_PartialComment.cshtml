@@ -1,0 +1,8 @@
+﻿@model CarShop.Models.Comment
+
+<div class="comment-content" style="border:1px solid gray;padding:20px;margin-bottom:30px;">
+    <div class="comment-meta d-flex align-items-center justify-content-between">
+        <p style="font-size:0.9em;"><a href="@Url.Action("Personal","Account",new { id=Model.UserID})" class="post-author">@Model.User.Name @Model.User.Surname</a> on <a href="#" class="post-date">@Model.ComDate.ToString()</a></p>
+    </div>
+    <p style="font-size:0.9em;">@Model.Content</p>
+</div>
